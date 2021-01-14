@@ -1,0 +1,108 @@
+<!-- 
+
+
+	Vue.js 템플릿 문법3
+	
+	# Directive : v-if
+	<span v-if="testFlag">True - Show</span>
+	<span v-else>False - Show</span>
+	v-if는 바인딩 된 'testFlag' 값에 따라서 엘리먼트를 선택적으로 표시할 수 있음
+	
+	
+	
+	
+	
+	# Directive : v-bind
+	<span v-bind:href="url">Link Activate</span>
+	
+	바인딩 된 엘리먼트의 속성 값을 동적으로 제어하는데 주로 사용됨
+	
+	
+	
+	
+	
+	# Directive : v-on:click
+	<button v-on:click="cnt += 1">{{ cnt }}</button>
+	<button @click="cnt += 1">{{ cnt }}</button>
+	
+	인스턴스에 바인딩 된 함수에 이벤트 핸들링이 가능하게 됨
+	주로 @를 붙여서 약어로 사용되는 경우가 많음
+	
+	
+	
+	
+	
+	# Directive : v-o 수식어
+	<form v-on:submit.prevent>...</form>
+	
+	v-on 디렉티브에 주로 사용될 수식어는 자바스크립트의 함수를 즉시 바인딩할 수 있다.
+	
+	
+	
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title>vue.js</title>
+</head>
+
+<body>
+	<div id="app">
+		<h3>디렉티브 v-if</h3>
+		<span v-if="testFlag">True show</span>
+		<span v-else>False show</span>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>디렉티브 v-bind</h3>
+		<a v-bind:href="url">Link Activate</a>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>디렉티브 v-on:click(1)</h3>
+		<button v-on:click="doPrint">click</button>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>디렉티브 v-on:click(2)</h3>
+		<button @click="cnt += 1">{{ cnt }}</button>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>디렉티브 수식어</h3>
+		<form v-on:submit.prevent>
+			<button type="submit" value="Submit">Submit Test</button>
+		</form>
+	</div>
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// 인스턴스 생성
+	var app = new Vue({
+		el: '#app',
+		data: {
+			testFlag: true,
+			url: 'http://google.com',
+			cnt: 0
+		},
+		methods: {
+			doPrint: function (e) {
+				console.log('Click Test!');
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

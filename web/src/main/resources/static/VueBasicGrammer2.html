@@ -1,0 +1,94 @@
+<!-- 
+
+
+	Vue.js 템플릿 문법2
+	
+	# JavaScript 표현식1 - 기본
+	<span>{{ number * 3 }}</span>
+	
+	기본적으로 자바스크립트 일반 표현식 사용이 가능하다
+	
+	
+	
+	
+	
+	# JavaScript 표현식2 - 삼항연산자
+	<span>{{ condition ? 'True' : 'False' }}</span>
+	
+	주의할 점 : 데이터 바인딩 영역(이중중괄호) 안에서는 IF(true) {...} 조건문 등은 사용 불가함
+	
+	
+	
+	
+	
+	# JavaScript 표현식3 - 함수 사용
+	<span>{{ message.split('').reverse().join('') }}</span>
+	
+	자바스크립트 객체.prototype에 정의되어 있는 함수들은 사용이 가능함
+	
+	
+	
+	
+	
+	# JavaScript 표현식4 - 속성 바인딩
+	<span v-bind:id="'list-' + addId">{{ addId }}</span>
+	
+	v-bind 태그의 속성 영역에도 표현식을 사용할 수 있다.
+	Key 값으로 된 id, class 등 동적인 선택자 생성에도 유용하게 사용할 수 있음
+	
+	
+	
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title>vue.js</title>
+</head>
+
+<body>
+	<div id="app">
+		<h3>JavaScript 표현식1</h3>
+		<span>{{ number * 3 }}</span>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>JavaScript 표현식2(삼항연산자)</h3>
+		<span>{{ condition ? 'True' : 'False' }}</span>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>JavaScript 표현식3</h3>
+		<span>{{ message.split('').reverse().join('') }}</span>
+		<br/>
+		<br/>
+		<br/>
+		
+		<h3>JavaScript 표현식4(속성 바인딩)</h3>
+		<span v-bind:id="'list-' + addId">{{ addId }}</span>
+	</div>
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// 인스턴스 생성
+	var app = new Vue({
+		el: '#app',
+		data: {
+			number: 15,
+			condition: true,
+			message: 'hello world',
+			addId: 'first'
+		}
+	})
+
+</script>
+</body>
+</html>

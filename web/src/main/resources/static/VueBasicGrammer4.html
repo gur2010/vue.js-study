@@ -1,0 +1,88 @@
+<!-- 
+
+
+	Vue.js 템플릿 문법3
+	-- compute, method --
+	
+	
+	
+	# computed
+	<p>Compute: {{ reversedMessage1 }}</p>
+	Vue 인스턴스의 computed 속성에서 바인딩을 함으로써 data의 message속성에 의존관계 설정
+	즉, message 변수의 값이 변경될 때만 reversedMessage1이 실행되어 업데이트 된다.
+	변경되는 부분이 없다면, 캐싱(Cache) 처리가 되어 기존 message 값이 바인딩 되어 빠른 속도의 렌더링 가능
+	
+	
+	
+	
+	# mehtod
+	<p>Method: {{ reversedMessage2() }}</p>
+	computed 속성과 다른점은 메소드(함수) 형태를 실행함으로써 message 값이 렌더링 된다.(=변경 유무와 상관없이 항상 호출됨)
+	
+	
+	
+	
+	!요약
+	computed - 일부가변경된 경우에만 메소드 호출
+	method - 변경과 상관없이 항상 호출
+	
+	
+	
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title>vue.js</title>
+</head>
+
+<body>
+	<div id="app">
+		<h3>Vue.js - compute, method</h3>
+		<div id="example">
+			<!-- 기본 -->
+			<p>Original : {{ message }}</p>
+			
+			<!-- 표현식 -->
+			<p>Expression: {{ message.split('').reverse().join('')}}</p>
+			
+			<!-- Compute -->
+			<p>Compute: {{ reversedMessage1 }}</p>
+			
+			<!-- Method -->
+			<p>Method: {{ reversedMessage2() }}</p>
+			
+			<p><input v-model="message"></p>
+		</div>
+	</div>
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// 인스턴스 생성
+	var app = new Vue({
+		el: '#example',
+		data: {
+			message: '12345'
+		},
+		computed: {		// message 값이 변경되지 않으면 캐싱된다.
+			reversedMessage1: function(){
+				// this : vm 객체
+				return this.message.split('').reverse().join('')
+			}
+		},
+		methods: {		// message 값은 항상 메소드 호출 후 반환된다.
+			reversedMessage2: function () {
+				return this.message.split('').reverse().join('')
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

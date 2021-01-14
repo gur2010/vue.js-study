@@ -1,0 +1,92 @@
+<!-- 
+
+
+	Vue.js 템플릿 문법
+	
+	# 문자열
+	<span>{{ message }}</span>
+	
+	기본적으로 데이터 바인딩은 이중 중괄호를 사용한다.
+	바인딩 이후에는 데이터의 message 속성이 변경될 때마다 자동으로 값이 변경(갱신)됨.
+	
+	
+	
+	
+	
+	# v-once 디렉티브
+	<span v-once>{{ message_once }}</span>
+	
+	v-once 디렉티브는 일회성 바인딩을 의미한다(값 변경x)
+	단, 같은 노드의 바인딩에도 영향을 끼치므로, 주의해서 사용!
+	
+	
+	
+	
+	
+	# v-html 디렉티브
+	<span v-html="message_html"></span>
+	
+	v-html 디렉티브는 텍스트 문자를 HTML로 해석해서 바인딩 한다. 
+	
+	
+	
+	
+	
+	# 속성
+	<button v-bind:disabled="isButtonDisabled">Button</button>
+	
+	v-bind 디렉티브는 태그의 속성을 제어 할 수 있다.
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title>vue.js</title>
+</head>
+
+<body>
+	<div id="app">
+		<h3>데이터 바인딩1(기본)</h3>
+			<span>{{ message }}</span>
+			<br/>
+			<br/>
+			<br/>
+		<h3>데이터 바인딩2(v-once)</h3>
+			<span v-once>{{ message_once }}</span>
+			<br/>
+			<br/>
+			<br/>
+		<h3>데이터 바인딩3(원시)</h3>
+			<span>{{ message_not_html }}</span>
+			<br/>
+			<br/>
+			<br/>
+		<h3>데이터 바인딩4(HTML)</h3>
+			<span v-html="message_html"></span>
+			<br/>
+		<h3>데이터 바인딩5(속성)</h3>
+			<button v-bind:disabled="isButtonDisabled">Button</button>	
+	</div>
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// vue.js 템플릿 문법 기초
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: '바인딩 테스트1',
+			message_once: '바인딩 테스트2',
+			message_not_html: '<h5>Tag 출력(X)</h5>',
+			message_html: '<h5 style="color:#ff0000">Tag 출력(O)</h5>',
+			isButtonDisabled: true
+		}
+	})
+</script>
+</body>
+</html>

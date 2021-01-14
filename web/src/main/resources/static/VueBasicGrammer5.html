@@ -1,0 +1,95 @@
+<!-- 
+
+
+	Vue.js - style 바인딩
+	
+	
+	
+	# 기본 스타일 바인딩
+	<p v-bind:style="{ fontSize: fontSize }"></p>
+	
+	data: {
+		fontSize: 30
+	}
+	
+	기본적인 v-bind:style 구문. CSS 문이 아닌 Javascript Object이다. data 속성의 fontSize와 바인딩 됨.
+	
+	
+	
+	
+	
+	# 배열 스타일 바인딩
+	<p v-bind:style="[baseStyles, overrideStyles]"></p>
+	
+	
+	
+	data: {
+		
+		baseStyles: {
+			fontWeight: 800,
+			color: 'red'
+		},
+		overrideStyles: {
+			color: 'blue'
+		}
+	}
+	
+	
+	
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title>vue.js</title>
+</head>
+
+<body>
+	<h2>Vue.js - Dynamic Style Binding</h2>
+	<div id="b-style">
+	<br/>
+	<br/>
+	<h3>인라인 스타일 바인딩</h3>
+		<button v-on:click="fontSize++">
+			Plus font size
+		</button>
+		<button v-on:click="fontSize--">
+			Minus font size
+		</button>
+		<p v-bind:style="{ fontSize: fontSize + 'px' }"> 
+			Font size is: {{ fontSize }}
+		</p>
+		<br/>
+		<br/>
+	<h3>배열 스타일 바인딩</h3>
+		<p v-bind:style="[baseStyles, overrideStyles]"> 
+			baseStyles and overrideStyles
+		</p>
+	</div>
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// v-vind : Style
+	var app = new Vue({
+		el: '#b-style',
+		data: {
+			fontSize: 20,
+			baseStyles: {
+				fontWeight: '800',
+				color: 'red'
+			},
+			overrideStyles: {
+				color:'blue'
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

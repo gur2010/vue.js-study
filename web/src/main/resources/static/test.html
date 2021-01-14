@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+
+<title>test</title>
+</head>
+<body>
+	<!-- 기본 렌더링 테스트 -->
+	<div id="app1">
+		기본 렌더링 테스트 : 
+		<span v-bind:title="message">
+			{{ message }}
+		</span>
+	</div><br><br>
+
+	<!-- 기본 렌더링 테스트 -->
+	<div id="app2">
+		기본 렌더링 테스트2 : 
+		<span v-bind:title="message">
+			마우스를 올리면 타이틀 메시지를 볼 수 있어요!
+		</span>
+	</div><br><br>
+
+	<!-- 조건문 테스트 -->
+	<div id="app3">
+		<p v-if="seen">조건문 테스트 : 조건문 테스트 메시지</p>
+	</div><br><br>
+
+	
+	<!-- 반복문 테스트 -->
+	<div id="app4">
+		<ol>
+			
+			<li v-for="todo in todos">
+				반목문 테스트 : {{ todo.text }}
+			</li>
+		</ol>
+	</div><br><br>
+
+	
+	<!-- 이벤트 핸들링1 -->
+	<div id="app5">
+		<p>이벤트 핸들링1 : {{ message }}</p>
+		<button v-on:click="reverseMessage">메시지 뒤집기</button>
+	</div><br><br>
+
+
+	<!-- 이벤트 핸들링2 : 실시간 입력 변화를 통해 DOM 상태 변화를 확인할 수 있음 -->
+	<div id="app6">
+		<p>이벤트 핸들링2 : {{ message }}</p>
+		<input v-model="message">
+	</div><br><br>
+
+	<!-- 컴포넌트 기본 실습 -->
+	<div id="app_comp">
+	<h1>Vue.js - 컴포넌트 기본 실습</h1>
+		<ol>
+			<todo-item 
+			 v-for="item in groceryList"
+			 v-bind:todo="item"
+			 v-bind:key="item.id">
+			</todo-item>
+		</ol>
+	</div>
+	
+	
+	<!-- 인스턴스 생성, watch(감시자) -->
+	<div id="app7">
+		<h1>Vue.js - 인스턴스 생성 & Watch</h1>
+		<h5>Count : {{test}}</h5>
+		<button v-on:click="test += 1">Add 1</button>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+	// 1.기본 렌더링 테스트
+	var app1 = new Vue({
+		el: '#app1',
+		data: {
+			message: '안녕하세요 Vue!'
+		}
+	})
+	
+	
+	// 2.기본 렌더링 테스트
+	var app2 = new Vue({
+		el: '#app2',
+		data: {
+			message: '이 페이지는 ' + new Date() + '에 로드 되었습니다.'
+		}
+	})
+	
+	
+	// 3.조건문 테스트 - console에서 app3.seen= true or false로 값 출력
+	var app3 = new Vue({
+		el: '#app3',
+		data: {
+			seen: true
+		}
+	})
+	
+	// 4.반복문 테스트
+	var app4 = new Vue({
+		el: '#app4',
+		data: {
+			todos: [
+				{text: 'JavaScript 배우기'},
+				{text: 'Vue 배우기'},
+				{text: 'React 배우기'}
+			]
+		}
+	})
+	
+	// 5.이벤트 핸들링 테스트1
+	var app5 = new Vue({
+		el: '#app5',
+		data: {
+			message : '안녕하세요!'
+		},
+		methods: {
+			reverseMessage : function(){
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	})
+	
+	// 6.이벤트 핸들링 테스트2
+	var app6 = new Vue({
+		el: '#app6',
+		data: {
+			message : '안녕하세요 Vue.js!!'
+		}
+	})
+	
+	/* 컴포넌트 
+	
+		- 재사용 가능한 응용프로그램을 구축 가능하게 하는 추상적 개념
+		- 거의 존재하는 모든 응용프로그램은 컴포넌트 트리로 추상화가 가능
+		- 미리 정의된 옵션을 가지고 있는 Vue.js의 인스턴스	
+	*/
+	//컴포넌트 정의
+	//props를 통해 부모 컴포넌트에서 데이터 
+	Vue.component('todo-item', {
+		props: ['todo'],
+		template: '<li>{{ todo.text }}</li>'
+	})
+	
+	var app_comp = new Vue({
+		el: '#app_comp',
+		data: {
+			groceryList: [
+				{id: 0, text: '삼겹살'},
+				{id: 1, text: '돼지갈비'},
+				{id: 2, text: '오리호박찜'},
+				{id: 3, text: '뚝배기소고기'}
+			]
+		}
+	})
+	
+	
+	
+	
+	/*인스턴스
+	 - 데이터 변경(watch) 관찰을 설정한ㄷ.
+	 - 템플릿(template)을 컴파일한다.
+	 - DOM을 마운트(Mount), 업데이트(Update) 한다.
+	 
+	 인스턴스를 초기화 할때는 다음과 같은 옵션 객체를 전달해야 한다.
+	  - 데이터(data)
+	  - 템플릿(template)
+	  - 마운트 엘리먼트(Mount Element)
+	  - 메소드(method)
+	  - 라이프사이클(LifeCycle) 관련 콜백 등
+	*/
+	
+	var data = { test: 0 };
+	
+	var vm = new Vue({
+		el: '#app7',
+		data: data,
+		created: function(){
+			//초기 데이터 확인
+			console.log('test is: ' + this.test)
+		}
+	})
+	
+	console.log(vm.test === data.test)
+	console.log(vm.$data === data)
+	
+	vm.$watch('test', function (newVal, oldVal) {
+		console.log('이전 데이터', oldVal)
+		console.log('변경 데이터', newVal)
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
